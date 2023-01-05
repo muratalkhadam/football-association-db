@@ -7,7 +7,7 @@ CREATE TABLE Referees (
 id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
 first_name VARCHAR(255) NOT NULL,
 last_name VARCHAR(255) NOT NULL,
-qualification VARCHAR(255)
+qualification VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Stadiums (
