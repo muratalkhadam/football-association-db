@@ -125,7 +125,7 @@ FROM sponsors s
 GROUP BY t.team_name, sponsor_type
 ORDER BY average_age;
 
-# # This SELECT statement gets the player number, position, and
+# This SELECT statement gets the player number, position, and
 # number of players with each player number and position combination.
 SELECT player_number,
        pc.position,
@@ -188,7 +188,7 @@ HAVING home_salary_sum > away_salary_sum;
 # This SELECT statement gets the team name, number of players with no red or yellow cards,
 # and average player salary for each team where all players have no red or yellow cards.
 SELECT t.team_name,
-       COUNT(p.id)             AS total_players_with_red,
+       COUNT(p.id)             AS total_players_without_card,
        ROUND(AVG(c.salary), 2) AS avg_player_salary
 FROM teams t
          JOIN contracts c ON t.id = c.team
