@@ -3,10 +3,10 @@ USE football_association;
 
 DROP VIEW IF EXISTS player_medcards;
 CREATE OR REPLACE VIEW player_medcards AS
-SELECT CONCAT(p.first_name, ' ', p.last_name) AS player_full_name,
+SELECT CONCAT(p.first_name, ' ', p.last_name)                           AS player_full_name,
        pc.height,
        pc.weight,
-       pc.birth_date
+       DATE_FORMAT(FROM_DAYS(DATEDIFF(NOW(), pc.birth_date)), '%Y') + 0 AS age
 FROM players p
          JOIN player_cards pc on p.id = pc.player;
 
