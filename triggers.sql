@@ -67,10 +67,10 @@ BEGIN
 END $$
 DELIMITER ;
 # ------------------------------------------
-SELECT sponsors.id AS sponsor_id,
+SELECT sponsors.id      AS sponsor_id,
        COUNT(team_name) AS sponsored_teams
 FROM sponsors
-JOIN teams t on sponsors.id = t.sponsor
+         JOIN teams t on sponsors.id = t.sponsor
 GROUP BY sponsors.id;
 
 INSERT INTO teams (team_name, founded, sponsor)
@@ -79,30 +79,35 @@ VALUES ('TEST', '2000-01-01', 1);
 INSERT INTO teams (team_name, founded, sponsor)
 VALUES ('TEST', '2000-01-01', 2);
 
-SELECT sponsors.id AS sponsor_id,
+SELECT sponsors.id      AS sponsor_id,
        COUNT(team_name) AS sponsored_teams
 FROM sponsors
-JOIN teams t on sponsors.id = t.sponsor
+         JOIN teams t on sponsors.id = t.sponsor
 GROUP BY sponsors.id;
 
-DELETE FROM teams WHERE team_name = 'TEST';
+DELETE
+FROM teams
+WHERE team_name = 'TEST';
 # ------------------------------------------
 
 
 DROP TRIGGER IF EXISTS before_delete_player;
 DELIMITER $$
 CREATE TRIGGER before_delete_player
-BEFORE DELETE ON Players
-FOR EACH ROW
+    BEFORE DELETE
+    ON Players
+    FOR EACH ROW
 BEGIN
     DECLARE contracts_exist INT;
-    SELECT COUNT(*) INTO contracts_exist
+    SELECT COUNT(*)
+    INTO contracts_exist
     FROM contracts
-    WHERE player = OLD.id AND end_date > CURDATE();
+    WHERE player = OLD.id
+      AND end_date > CURDATE();
 
     IF contracts_exist > 0 THEN
         SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'Cannot delete player with valid contracts';
+            SET MESSAGE_TEXT = 'Cannot delete player with valid contracts';
     END IF;
 END $$
 DELIMITER ;
@@ -116,14 +121,19 @@ WHERE c.end_date > CURDATE()
 GROUP BY p.id
 ORDER BY p.id, valid_contracts;
 
-DELETE FROM players
+DELETE
+FROM players
 WHERE id = 1;
 
-INSERT INTO players (first_name, last_name, player_number) VALUES ('TEST', 'TEST', 88);
+INSERT INTO players (first_name, last_name, player_number)
+VALUES ('TEST', 'TEST', 88);
 
-SELECT * FROM players;
+SELECT *
+FROM players;
 
-DELETE FROM players
+DELETE
+FROM players
 WHERE first_name = 'TEST';
 
-SELECT * FROM players;
+SELECT *
+FROM players;

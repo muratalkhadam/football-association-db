@@ -23,7 +23,6 @@ END $$
 DELIMITER ;
 SELECT get_lowest_scoring_team() AS lowest_scoring_team_id;
 
-
 DROP FUNCTION IF EXISTS get_highest_paid_team_by_sponsor;
 DELIMITER $$
 CREATE FUNCTION get_highest_paid_team_by_sponsor(sponsor_id INT)

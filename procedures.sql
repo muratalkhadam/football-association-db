@@ -57,10 +57,12 @@ DELIMITER $$
 CREATE PROCEDURE get_team_by_player(IN player_id INT)
 BEGIN
     DECLARE team_id INT;
-    SELECT DISTINCT team INTO team_id
+    SELECT DISTINCT team
+    INTO team_id
     FROM players
-    JOIN contracts c1 ON players.id = c1.player
-    WHERE player = player_id AND c1.end_date > CURDATE();
+             JOIN contracts c1 ON players.id = c1.player
+    WHERE player = player_id
+      AND c1.end_date > CURDATE();
 
     SELECT p.id, p.first_name, p.last_name, p.player_number, t.team_name
     FROM players p
