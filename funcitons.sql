@@ -45,7 +45,7 @@ END $$
 DELIMITER ;
 SELECT get_highest_paid_team_by_sponsor(5) AS highest_paid_team_id;
 
-DROP FUNCTION IF EXISTS get_lowest_scoring_team2;
+DROP FUNCTION IF EXISTS get_best_paid_player_for_team;
 DELIMITER $$
 CREATE FUNCTION get_best_paid_player_for_team(team_id INT)
     RETURNS INT
