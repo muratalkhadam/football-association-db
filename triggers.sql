@@ -89,9 +89,9 @@ DELETE FROM teams WHERE team_name = 'TEST';
 # ------------------------------------------
 
 
-DROP TRIGGER IF EXISTS prevent_player_deletion;
+DROP TRIGGER IF EXISTS before_delete_player;
 DELIMITER $$
-CREATE TRIGGER prevent_player_deletion
+CREATE TRIGGER before_delete_player
 BEFORE DELETE ON Players
 FOR EACH ROW
 BEGIN
