@@ -1,7 +1,7 @@
 USE football_association;
 
-DROP TABLE IF EXISTS index_test;
-CREATE TABLE index_test AS
+DROP TEMPORARY TABLE IF EXISTS index_test;
+CREATE TEMPORARY TABLE index_test AS
 SELECT p.id, p.first_name, p. last_name, p.player_number, c.team, c.start_date, c.end_date, c.salary
 FROM players p
          CROSS JOIN contracts c;
@@ -22,4 +22,5 @@ SELECT DISTINCT id, last_name, last_name, team
 FROM index_test
 WHERE salary = 729631.00;
 
-DROP TABLE index_test;
+SELECT *
+FROM index_test
